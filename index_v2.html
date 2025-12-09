@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Oikos Realty</title>
+  <style>
+    /* ---------- Color Palette ---------- */
+    :root {
+      --primary-bg: #263238;
+      --cta-blue: #0288D1;
+      --cta-green: #388E3C;
+      --secondary-info: #4DD0E1;
+      --text-color: #ECEFF1;
+      --card-border: #607D8B;
+    }
+
+    /* ---------- Reset & Base Styles ---------- */
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: Arial, sans-serif; }
+    body {
+    background: linear-gradient(135deg, #37474F 0%, #03A9F4 70%);
+      /* color: #212121; */
+    text-shadow: 0 1px 2px rgba(255,255,255,0.3);
+    color: #FFFFFF;
+    /* color: #ECEFF1; */
+    /* color: var(--text-color); */
+    line-height: 1.6;
+    font-family: Arial, sans-serif;
+    }
+    a { text-decoration: none; color: inherit; }
+    img { max-width: 100%; display: block; }
+
+    /* ---------- Header ---------- */
+    header { background: var(--primary-bg); padding: 20px 0; border-bottom: 1px solid var(--card-border); }
+    nav { display: flex; justify-content: space-between; align-items: center; width: 90%; margin: auto; }
+    nav ul { list-style: none; display: flex; gap: 20px; }
+    nav ul li a { color: var(--text-color); font-weight: bold; transition: 0.3s; }
+    nav ul li a:hover { color: var(--secondary-info); }
+
+    /* ---------- Hero Section ---------- */
+    .hero { background: url('https://via.placeholder.com/1600x500/263238/FFFFFF?text=Oikos+Realty') no-repeat center center/cover; height: 500px; display: flex; align-items: center; justify-content: center; text-align: center; }
+    .hero h1 { font-size: 3em; margin-bottom: 20px; color: var(--text-color); }
+    .hero p { font-size: 1.2em; margin-bottom: 20px; color: var(--text-color); }
+    .hero a { background: var(--cta-blue); padding: 10px 20px; color: #fff; border-radius: 5px; font-weight: bold; transition: 0.3s; }
+    .hero a:hover { background: var(--cta-green); }
+
+    /* ---------- About Section ---------- */
+    section { padding: 60px 10%; }
+    h2 { text-align: center; margin-bottom: 40px; color: #03045E; }
+    .about p { max-width: 700px; margin: auto; text-align: center; }
+
+    /* ---------- Featured Properties Carousel ---------- */
+    .carousel-container { position: relative; overflow: hidden; max-width: 100%; margin: auto; }
+    .carousel-track { display: flex; transition: transform 0.5s ease-in-out; }
+    .property-card { flex: 0 0 300px; margin: 0 15px; border: 1px solid var(--card-border); border-radius: 8px; overflow: hidden; background: #37474F; color: var(--text-color); }
+    .property-card img { height: 200px; object-fit: cover; }
+    .property-card div { padding: 15px; }
+    .property-card h3 { margin-bottom: 10px; color: var(--secondary-info); }
+    .property-card p { margin-bottom: 5px; }
+
+    .carousel-buttons { position: absolute; top: 50%; transform: translateY(-50%); width: 100%; display: flex; justify-content: space-between; pointer-events: none; }
+    .carousel-buttons button { pointer-events: all; background: var(--cta-blue); border: none; color: #fff; padding: 10px 15px; border-radius: 50%; cursor: pointer; transition: 0.3s; }
+    .carousel-buttons button:hover { background: var(--cta-green); }
+
+    /* ---------- Services ---------- */
+    .services { display: flex; flex-wrap: wrap; gap: 20px; justify-content: center; }
+    .service { flex: 1 1 250px; border: 1px solid var(--card-border); padding: 20px; border-radius: 8px; text-align: center; background: #37474F; }
+    .service h3 { margin-bottom: 15px; color: var(--secondary-info); }
+
+    /* ---------- Testimonials ---------- */
+    .testimonials { display: flex; flex-wrap: wrap; gap: 20px; justify-content: center; }
+    .testimonial { flex: 1 1 250px; border: 1px solid var(--card-border); padding: 20px; border-radius: 8px; font-style: italic; background: #37474F; }
+
+    /* ---------- Contact ---------- */
+    .contact form { max-width: 600px; margin: auto; display: flex; flex-direction: column; gap: 15px; }
+    .contact input, .contact textarea { padding: 10px; border-radius: 5px; border: 1px solid var(--card-border); width: 100%; background: #455A64; color: var(--text-color); }
+    .contact button { padding: 10px; background: var(--cta-blue); color: #fff; border: none; border-radius: 5px; font-weight: bold; cursor: pointer; transition: 0.3s; }
+    .contact button:hover { background: var(--cta-green); }
+
+    /* ---------- Social Icons ---------- */
+    .social-icons { display: flex; justify-content: center; gap: 20px; margin-top: 20px; }
+.social-icons a { 
+  color: #ffffff; /* subtle cyan */
+  font-size: 1.5em; 
+  transition: 0.3s; 
+}
+.social-icons a:hover { 
+  color: #0288D1; /* deep blue on hover */
+}
+
+    /* ---------- Footer ---------- */
+    footer { background: var(--primary-bg); color: var(--text-color); text-align: center; padding: 20px 0; margin-top: 40px; border-top: 1px solid var(--card-border); }
+
+    @media (max-width: 768px) {
+      nav { flex-direction: column; gap: 10px; }
+      .carousel-track { flex-wrap: nowrap; }
+      .property-card { flex: 0 0 80%; margin: 0 10px; }
+    }
+
+    /* body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  height: 100vh;
+  overflow: hidden;
+  background-color: #f0f4f8;
+  position: relative;
+} */
+
+#watermark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+}
+/* 
+.content {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  padding-top: 100px;
+}
+
+h1 {
+  color: #37474F;
+  font-size: 3rem;
+}
+
+p {
+  color: #607D8B;
+  font-size: 1.2rem;
+} */
+
+  </style>
+  <!-- Font Awesome -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-..." crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <nav>
+      <h1>Oikos Realty</h1>
+      <ul>
+        <li><a href="#home">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#properties">Properties</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+    <div id="watermark"></div>
+  <!-- Hero Section -->
+  <section class="hero" id="home">
+    <div>
+      <h1>Find Your Dream Home</h1>
+      <p>Explore premium properties with Oikos Realty</p>
+      <a href="#properties">View Listings</a>
+    </div>
+  </section>
+
+  <!-- About Us -->
+  <section class="about" id="about">
+    <h2>About Oikos Realty</h2>
+    <p>Oikos Realty is dedicated to helping you find your perfect home. With years of experience in the real estate market, we provide professional and personalized services to buyers, sellers, and investors.</p>
+  </section>
+
+  <!-- Featured Properties Carousel -->
+  <section class="properties-section" id="properties">
+    <h2>Featured Properties</h2>
+    <div class="carousel-container">
+      <div class="carousel-track" id="carousel-track">
+        <!-- Sample 10 properties -->
+        <div class="property-card">
+          <img src="houses/Luxury-Apartment.jpg" alt="Property 1">
+          <div>
+            <h3>Luxury Apartment</h3>
+            <p>3 Bed, 2 Bath</p>
+            <p>Downtown</p>
+            <p>PHP 3,500,000</p>
+          </div>
+        </div>
+        <div class="property-card">
+          <img src="houses/Modern-House.jpg" alt="Property 2">
+          <div>
+            <h3>Modern House</h3>
+            <p>4 Bed, 3 Bath</p>
+            <p>Suburbs</p>
+            <p>PHP 30,800,000</p>
+          </div>
+        </div>
+        <div class="property-card">
+          <img src="houses/Cozy-Condo.jpg" alt="Property 3">
+          <div>
+            <h3>Cozy Condo</h3>
+            <p>2 Bed, 1 Bath</p>
+            <p>City Center</p>
+            <p>PHP 1,500,000</p>
+          </div>
+        </div>
+        <div class="property-card">
+          <img src="houses/Family-Home.jpg" alt="Property 4">
+          <div>
+            <h3>Family Home</h3>
+            <p>4 Bed, 2 Bath</p>
+            <p>Suburbs</p>
+            <p>PHP 10,500,000</p>
+          </div>
+        </div>
+        <div class="property-card">
+          <img src="houses/Penthouse.jpg" alt="Property 5">
+          <div>
+            <h3>Penthouse</h3>
+            <p>5 Bed, 4 Bath</p>
+            <p>City Center</p>
+            <p>PHP 20,500,000</p>
+          </div>
+        </div>
+        <div class="property-card">
+          <img src="houses/Beach-House.avif" alt="Property 6">
+          <div>
+            <h3>Beach House</h3>
+            <p>3 Bed, 2 Bath</p>
+            <p>Coastline</p>
+            <p>PHP 15,600,000</p>
+          </div>
+        </div>
+        <div class="property-card">
+          <img src="houses/Mountain-Cabin.jpg" alt="Property 7">
+          <div>
+            <h3>Mountain Cabin</h3>
+            <p>2 Bed, 1 Bath</p>
+            <p>Highlands</p>
+            <p>PHP 1,000,000</p>
+          </div>
+        </div>
+        <div class="property-card">
+          <img src="houses/Suburban-Villa.jpeg" alt="Property 8">
+          <div>
+            <h3>Suburban Villa</h3>
+            <p>4 Bed, 3 Bath</p>
+            <p>Suburbs</p>
+            <p>PHP 9,500,000</p>
+          </div>
+        </div>
+        <div class="property-card">
+          <img src="houses/City-Loft.jpg" alt="Property 9">
+          <div>
+            <h3>City Loft</h3>
+            <p>2 Bed, 2 Bath</p>
+            <p>City Center</p>
+            <p>PHP 13,500,000</p>
+          </div>
+        </div>
+        <div class="property-card">
+          <img src="houses/Eco-Friendly-Home.jpg" alt="Property 10">
+          <div>
+            <h3>Eco-Friendly Home</h3>
+            <p>3 Bed, 2 Bath</p>
+            <p>Green District</p>
+            <p>PHP 50,500,000</p>
+          </div>
+        </div>
+      </div>
+      <div class="carousel-buttons">
+        <button id="prev">&#10094;</button>
+        <button id="next">&#10095;</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services -->
+  <section class="services-section" id="services">
+    <h2>Our Services</h2>
+    <div class="services">
+      <div class="service">
+        <h3>Buying & Selling</h3>
+        <p>We help you buy and sell properties with ease and professionalism.</p>
+      </div>
+      <div class="service">
+        <h3>Property Management</h3>
+        <p>Efficient management of your rental properties for maximum returns.</p>
+      </div>
+      <div class="service">
+        <h3>Consulting</h3>
+        <p>Market advice and property valuation services for informed decisions.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <section class="testimonials-section">
+    <h2>What Our Clients Say</h2>
+    <div class="testimonials">
+      <div class="testimonial">
+        "Oikos Realty made buying our first home a smooth and joyful experience!"
+      </div>
+      <div class="testimonial">
+        "Professional, responsive, and trustworthy – highly recommend Oikos Realty."
+      </div>
+      <div class="testimonial">
+        "Thanks to Oikos Realty, we sold our property quickly at a great price."
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section class="contact" id="contact">
+    <h2>Contact Us</h2>
+    <form>
+      <input type="text" placeholder="Your Name" required>
+      <input type="email" placeholder="Your Email" required>
+      <textarea placeholder="Your Message" rows="5" required></textarea>
+      <button type="submit">Send Message</button>
+    </form>
+    <div class="social-icons">
+    <a href="#" target="_blank"><i class="fab fa-twitter fw-normal"></i></a>
+    <a href="#" target="_blank"><i class="fab fa-facebook-f fw-normal"></i></a>
+    <a href="#" target="_blank"><i class="fab fa-instagram fw-normal"></i></a>
+    <a href="#" target="_blank"><i class="fab fa-youtube fw-normal"></i></a>
+    </div>
+    <p style="text-align:center; margin-top:20px;">Phone: (123) 456-7890 | Email: info@oikosrealty.com</p>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2025 Oikos Realty. All Rights Reserved.</p>
+  </footer>
+
+  <!-- ---------- Carousel JS ---------- -->
+  <script>
+const track = document.getElementById('carousel-track');
+const nextButton = document.getElementById('next');
+const prevButton = document.getElementById('prev');
+
+let index = 0;
+const cards = document.querySelectorAll('.property-card');
+const cardWidth = cards[0].offsetWidth + 30; // card width + margin
+
+function updateCarousel() {
+  track.style.transform = `translateX(-${index * cardWidth}px)`;
+}
+
+// Manual controls
+nextButton.addEventListener('click', () => {
+  moveNext();
+});
+prevButton.addEventListener('click', () => {
+  movePrev();
+});
+
+function moveNext() {
+  if(index < cards.length - 3) { index++; } 
+  else { index = 0; }
+  updateCarousel();
+}
+
+function movePrev() {
+  if(index > 0) { index--; } 
+  else { index = cards.length - 3; }
+  updateCarousel();
+}
+
+// Automatic rotation every 3 seconds
+let autoSlide = setInterval(moveNext, 3000);
+
+// Pause on hover
+const carouselContainer = document.querySelector('.carousel-container');
+carouselContainer.addEventListener('mouseenter', () => clearInterval(autoSlide));
+carouselContainer.addEventListener('mouseleave', () => {
+  autoSlide = setInterval(moveNext, 3000);
+});
+
+
+const watermark = document.getElementById('watermark');
+const canvas = document.createElement('canvas');
+watermark.appendChild(canvas);
+const ctx = canvas.getContext('2d');
+
+function resizeCanvas() {
+    canvas.width = window.innerWidth;
+    canvas.height = document.body.scrollHeight; // full document height
+    drawWatermarks();
+}
+
+function drawHouse(x, y, size) {
+    ctx.save();
+    ctx.translate(x, y);
+    ctx.scale(size, size);
+
+    // House base
+    ctx.fillStyle = 'rgba(55, 71, 79, 0.05)';
+    ctx.fillRect(-20, 0, 40, 40);
+
+    // Roof
+    ctx.beginPath();
+    ctx.moveTo(-25, 0);
+    ctx.lineTo(0, -25);
+    ctx.lineTo(25, 0);
+    ctx.closePath();
+    ctx.fill();
+
+    // Door
+    ctx.fillStyle = 'rgba(55, 71, 79, 0.08)';
+    ctx.fillRect(-7, 15, 14, 25);
+
+    ctx.restore();
+}
+
+function drawWatermarks() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    const spacing = 150; // distance between houses
+    for (let y = 0; y < canvas.height; y += spacing) {
+        for (let x = 0; x < canvas.width; x += spacing) {
+            drawHouse(x, y, 1.2);
+        }
+    }
+}
+
+// Initial draw
+resizeCanvas();
+
+// Redraw on window resize
+window.addEventListener('resize', resizeCanvas);
+
+
+  </script>
+
+</body>
+</html>
